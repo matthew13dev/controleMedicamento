@@ -7,7 +7,7 @@ spring:
       password: adminpass
       roles: ADMIN
   datasource:
-    url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}
+    url: ${DATABASE_URL}
     user: ${PGUSER}
     password: ${PGPASSWORD}
     driver-class-name: org.postgresql.Driver
