@@ -10,7 +10,7 @@ spring:
     url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}
     user: ${PGUSER}
     password: ${PGPASSWORD}
-    drive-class-name: org.postgresql.Driver
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
