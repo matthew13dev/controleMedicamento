@@ -6,6 +6,11 @@ spring:
       name: admin
       password: adminpass
       roles: ADMIN
+  datasource:
+    url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}
+    user: ${PGUSER}
+    password: ${PGPASSWORD}
+    drive-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
