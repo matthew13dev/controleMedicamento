@@ -16,7 +16,9 @@ public class CorsConfigurationSourceConfig {
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedOrigins(List.of(
+                "http://localhost:4200",
+                "https://controle-farmacia-angular.vercel.app"));
 
         configuration.setAllowedMethods(List.of(
                 "GET",
