@@ -32,23 +32,15 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erroResponseDTO);
     }
 
-
-//    @ExceptionHandler(DataIntegrityViolationException.class)
-//    public ResponseEntity<ErroResponseDTO> handleDataIntegrity(DataIntegrityViolationException ex) {
-//        ErroResponseDTO body = new ErroResponseDTO(
-//                ex.getMessage(),
-//                HttpStatus.BAD_REQUEST.value()
-//        );
-//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
-//    }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErroResponseDTO> handleGeneric(Exception ex) {
-        ErroResponseDTO body = new ErroResponseDTO(
-                ex.getMessage() != null ? ex.getMessage() : "Erro interno",
-                HttpStatus.INTERNAL_SERVER_ERROR.value()
+    @ExceptionHandler(AuthException.class)
+    public ResponseEntity<ErroResponseDTO> handleAuthException(AuthException exception){
+        ErroResponseDTO erroResponseDTO = new ErroResponseDTO(
+                exception.getMessage(),
+                HttpStatus.NOT_FOUND.value()
         );
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erroResponseDTO);
+
     }
 
 }

@@ -18,6 +18,7 @@ public class CorsConfigurationSourceConfig {
 
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:4200",
+                "http://localhost:8081",
                 "https://controle-farmacia-angular.vercel.app"));
 
         configuration.setAllowedMethods(List.of(
@@ -28,7 +29,7 @@ public class CorsConfigurationSourceConfig {
                 "OPTIONS"
         ));
 
-        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
 
         configuration.setAllowCredentials(true);
 
