@@ -4,6 +4,7 @@ package com.medicamento.controle.medicamentos;
 import com.medicamento.controle.medicamentos.dtos.MedicamentoCreateDTO;
 import com.medicamento.controle.medicamentos.dtos.MedicamentoDTO;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class MedicamentoController {
 
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<List<MedicamentoDTO>> buscarTodos(){
         return ResponseEntity.ok().body(service.buscarTodos());
     }
@@ -53,17 +55,14 @@ public class MedicamentoController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletar(@PathVariable Long id){
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/registro")
-    public ResponseEntity<List<MedicamentoDTO>> novoMedicamento(@RequestParam String ean,@RequestParam String registro){
-        return ResponseEntity.ok().body(service.atualizarRegistroAnviza(ean,registro));
-    }
-
     @PostMapping()
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MedicamentoDTO> novoMedicamento(@RequestBody MedicamentoCreateDTO dto){
         return ResponseEntity.ok().body(service.novoMedicamento(dto));
     }
