@@ -76,4 +76,12 @@ public class AuthController {
 
         return ResponseEntity.ok().body(service.buscarUsuarios());
     }
+
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> apagarUsuario(@PathVariable Long id){
+        service.apagarUsuario(id);
+        return ResponseEntity.noContent().build();
+    }
 }

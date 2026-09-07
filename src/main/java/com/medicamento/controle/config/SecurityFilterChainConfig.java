@@ -18,9 +18,7 @@ public class SecurityFilterChainConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/auth/cadastro").permitAll()
-
+                        .requestMatchers(HttpMethod.POST,"/auth/login","/auth/cadastro").permitAll()
                         .anyRequest().authenticated()
                 )
                 .cors(Customizer.withDefaults())

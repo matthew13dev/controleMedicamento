@@ -67,4 +67,13 @@ public class AuthService implements UserDetailsService {
 
         return repository.findByUsername(name).orElseThrow(()->new AuthException("usuario nao existe"));
     }
+
+    public void apagarUsuario(Long id) {
+
+        if(repository.findById(id).isEmpty()){
+            throw new AuthException("ID nao existe para ser deletado");
+        }
+
+        repository.deleteById(id);
+    }
 }
