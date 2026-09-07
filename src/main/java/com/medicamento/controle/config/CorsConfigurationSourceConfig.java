@@ -29,7 +29,9 @@ public class CorsConfigurationSourceConfig {
                 "OPTIONS"
         ));
 
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+//        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+
+        configuration.setAllowedHeaders(List.of("*"));
 
         configuration.setAllowCredentials(true);
 
