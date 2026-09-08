@@ -1,7 +1,7 @@
 package com.medicamento.controle.execptions;
 
 public record ErroResponseDTO(
-        String mensagem,
+        String menssagem,
         Integer codigo
 ) {
 }

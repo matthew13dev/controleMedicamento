@@ -43,7 +43,7 @@ public class AuthService implements UserDetailsService {
         return usuario;
     }
 
-    public  void novoUser(AuthEntity novoUsuario){
+    public  AuthEntity novoUser(AuthEntity novoUsuario){
 
         if(repository.findByUsername(novoUsuario.getUsername()).isPresent()){
             throw  new AuthException("Nome de usuário já existe, não é possivel criar");
@@ -54,7 +54,7 @@ public class AuthService implements UserDetailsService {
 
         usuario.setPassword(passwordEncoder.encode(novoUsuario.getPassword()));
 
-        repository.save(usuario);
+        return repository.save(usuario);
 
     }
 
@@ -70,8 +70,10 @@ public class AuthService implements UserDetailsService {
 
     public void apagarUsuario(Long id) {
 
-        if(repository.findById(id).isEmpty()){
-            throw new AuthException("ID nao existe para ser deletado");
+        AuthEntity usuarioParaApagar = repository.findById(id).orElseThrow(()-> new AuthException("ID não existe"));
+
+        if("admin_init".equals(usuarioParaApagar.getUsername())){
+            throw new AuthException("não é possivel apagar administrador principal");
         }
 
         repository.deleteById(id);

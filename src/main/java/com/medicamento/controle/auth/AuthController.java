@@ -28,10 +28,10 @@ public class AuthController {
     }
 
     @PostMapping("/cadastro")
-    public ResponseEntity<String> cadastro(@RequestBody AuthEntity usuario){
+    public ResponseEntity<AuthEntity> cadastro(@RequestBody AuthEntity usuario){
 
-        service.novoUser(usuario);
-        return ResponseEntity.ok().body("Registrado com Sucesso!");
+        ;
+        return ResponseEntity.ok().body(service.novoUser(usuario));
     }
 
     @PostMapping("/login")
@@ -64,6 +64,7 @@ public class AuthController {
             return ResponseEntity.status(401).build();
         }
 
+        System.out.println("NOME QUE VEIO DA SESSAO (Principal): " + (principal != null ? principal.getName() : "NULO"));
         // Busca direto no repositório pelo username que veio da sessão
         AuthEntity usuario = service.buscarUsuario(principal.getName());
 

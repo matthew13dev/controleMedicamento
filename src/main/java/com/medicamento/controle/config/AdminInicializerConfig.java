@@ -21,8 +21,8 @@ public class AdminInicializerConfig {
 
                 AuthEntity adminb = new AuthEntity();
 
-                adminb.setUsername("admin");
-                adminb.setPassword(passwordEncoder.encode("admin123"));
+                adminb.setUsername("admin_init");
+                adminb.setPassword(passwordEncoder.encode("147258369"));
                 adminb.setRole("ADMIN");
 
 

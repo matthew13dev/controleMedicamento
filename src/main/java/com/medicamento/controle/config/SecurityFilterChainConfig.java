@@ -21,8 +21,8 @@ public class SecurityFilterChainConfig {
                         .requestMatchers(HttpMethod.POST,"/auth/login","/auth/cadastro").permitAll()
                         .anyRequest().authenticated()
                 )
-                .cors(Customizer.withDefaults())
-                .httpBasic(Customizer.withDefaults());
+                .cors(Customizer.withDefaults());
+//                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
