@@ -11,8 +11,10 @@ public class SecurityConfigCookie {
     @Bean
     public CookieSerializer cookieSerializer() {
         DefaultCookieSerializer serializer = new DefaultCookieSerializer();
-        serializer.setSameSite("None"); // Permite requisições cruzadas (Front na Vercel + Backend externo)
-        serializer.setUseSecureCookie(true); // Exige HTTPS (obrigatório em produção)
+        serializer.setCookieName("JSESSIONID");
+        serializer.setSameSite("None");
+        serializer.setUseSecureCookie(true);
+        serializer.setUseHttpOnlyCookie(true);
         return serializer;
     }
 }
