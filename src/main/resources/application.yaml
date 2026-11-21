@@ -18,6 +18,9 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  session:
+    jdbc:
+      initialize-schema: always
 server:
   port: 8081
   tomcat:

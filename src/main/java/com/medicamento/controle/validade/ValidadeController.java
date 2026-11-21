@@ -35,8 +35,8 @@ public class ValidadeController {
     }
 
     @PostMapping
-    public ResponseEntity<ValidadeDTO> criar(@RequestBody ValidadeCreateDTO dto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(dto));
+    public ResponseEntity<ValidadeDTO> criar(@RequestBody ValidadeCreateDTO dto,@AuthenticationPrincipal AuthEntity usuarioLogado){
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(dto, usuarioLogado.getId()));
     }
 
     @PutMapping("/{id}")

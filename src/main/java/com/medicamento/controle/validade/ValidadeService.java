@@ -48,9 +48,9 @@ public class ValidadeService {
 
 
 
-    protected ValidadeDTO criar(ValidadeCreateDTO dto){
+    protected ValidadeDTO criar(ValidadeCreateDTO dto,Long usuarioId){
 
-        if(dto.usuarioId() == null){
+        if(usuarioId == null){
             throw new ValidadeException("usuario não existe para poder criar uma validade");
         }
 
@@ -62,6 +62,7 @@ public class ValidadeService {
                 .orElseThrow(()->new ValidadeException("Medicamento não Existe para ser validade"));
 
         ValidadeEntity entity = mapper.toSaveEntity(dto);
+        entity.setUsuarioId(usuarioId);
         entity.setMedicamento(existente);
 
         repository.save(entity);
