@@ -26,18 +26,18 @@ public class ValidadeService {
     }
 
 
-    protected List<ValidadeDTO> buscarTodos(){
+    protected List<ValidadeDTO> buscarTodos(Long usuarioId){
 
-        return repository.findAll()
+        return repository.findByUsuarioId(usuarioId)
                 .stream()
                 .map(mapper::toDto)
                 .sorted(Comparator.comparing(ValidadeDTO::dias_restantes))
                 .toList();
     }
 
-    protected  List<ValidadeDTO> buscar10Dias(){
+    protected  List<ValidadeDTO> buscar10Dias(Long usuarioId){
 
-        return repository.findAll()
+        return repository.findByUsuarioId(usuarioId)
                 .stream()
                 .map(mapper::toDto)
                 .sorted(Comparator.comparing(ValidadeDTO::dias_restantes))
@@ -49,6 +49,10 @@ public class ValidadeService {
 
 
     protected ValidadeDTO criar(ValidadeCreateDTO dto){
+
+        if(dto.usuarioId() == null){
+            throw new ValidadeException("usuario não existe para poder criar uma validade");
+        }
 
         if(dto.data_vencimento() == null){
             throw new ValidadeException("Data de vencimetno não encontrada, dados incompletos");
@@ -68,7 +72,7 @@ public class ValidadeService {
 
     protected ValidadeDTO atualizar(Long id, ValidadeCreateDTO dto){
 
-        ValidadeEntity existente = repository.findById(id)
+        ValidadeEntity existente = repository.findByIdAndUsuarioId(id, dto.usuarioId())
                 .orElseThrow(()-> new ValidadeException("Validade não existe"));
 
 
@@ -80,9 +84,9 @@ public class ValidadeService {
     }
 
 
-    protected void deletar(Long id){
+    protected void deletar(Long id,Long usuarioId){
 
-        ValidadeEntity existente = repository.findById(id)
+        ValidadeEntity existente = repository.findByIdAndUsuarioId(id,usuarioId)
                 .orElseThrow(()->new ValidadeException("Validade não existe"));
 
         repository.deleteById(id);

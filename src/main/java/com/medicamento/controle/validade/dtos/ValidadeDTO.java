@@ -9,6 +9,7 @@ public record ValidadeDTO(
         String lote,
         LocalDate data_vencimento,
         Long dias_restantes,
-        MedicamentoDTO medicamento
+        MedicamentoDTO medicamento,
+        Long usuarioId
 ) {
 }

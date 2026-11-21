@@ -28,7 +28,8 @@ public class ValidadeMapper {
                 entity.lote,
                 entity.dataVencimento,
                 ChronoUnit.DAYS.between(LocalDate.now(), entity.getDataVencimento()),
-                medicamentoMapper.toDto(entity.medicamento)
+                medicamentoMapper.toDto(entity.medicamento),
+                entity.getUsuarioId()
         );
     }
 
@@ -40,6 +41,7 @@ public class ValidadeMapper {
             entity.setLote(dto.lote());
             entity.setDataVencimento(dto.data_vencimento());
             entity.setMedicamento(medicamentoMapper.toEntity(dto.medicamento()));
+            entity.setUsuarioId(dto.usuarioId());
 
         return entity;
     }
@@ -52,6 +54,7 @@ public class ValidadeMapper {
         entity.setLote(dto.lote());
         entity.setDataVencimento(dto.data_vencimento());
         entity.setMedicamento(medicamentoService.findById(dto.medicamentoId()).orElseThrow(()->new ValidadeException("Validade, medicamento nao existe")));
+        entity.setUsuarioId(dto.usuarioId());
 
         return entity;
     }

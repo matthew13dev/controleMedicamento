@@ -22,6 +22,16 @@ public class ValidadeEntity {
     @JoinColumn(name = "medicamento_id", nullable = false,updatable=false)
     MedicamentoEntity medicamento;
 
+    @Column(name = "usuario_id",nullable = false)
+    private Long usuarioId;
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
 
     public Long getId() {
         return id;
